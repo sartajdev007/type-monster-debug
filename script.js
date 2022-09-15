@@ -101,30 +101,30 @@ const closeModal = () => {
 
 const start = () => {
   // If already started, do not start again
-  if (startTime) return;
+  if (startTime) {
+    let count = 3;
+    countdownOverlay.style.display = "flex";
+    const startCountdown = setInterval(() => {
+      countdownOverlay.innerHTML = `<h1>${count}</h1>`;
+      // finished timer
+      if (count == 0) {
+        // -------------- START TYPING -----------------
+        document.addEventListener("keydown", typeController);
+        countdownOverlay.style.display = "flex";
+        display.classList.remove("inactive");
 
-  let count = 3;
-  countdownOverlay.style.display = "flex";
-
-  const startCountdown = setInterval(() => {
-    countdownOverlay.innerHTML = '<h1>${count}</h1>';
-
-    // finished timer
-    if (count == 0) {
-      // -------------- START TYPING -----------------
-      document.addEventListener("keydown", typeController);
-      countdownOverlay.style.display = "flex";
-      display.classList.remove("inactive");
-
-      clearInterval(startCountdown);
-      startTime = new Date().getTime();
-    }
-    count--;
-  }, 1000);
+        clearInterval(startCountdown);
+        startTime = new Date().getTime();
+      }
+      count--;
+    }, 1000);
+  }
 };
 
 // START Countdown
-startBtn.addEventListener("click", start);
+startBtn.addEventListener("click", function () {
+  start();
+});
 
 // If history exists, show it
 displayHistory();
