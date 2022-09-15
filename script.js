@@ -127,7 +127,7 @@ startBtn.addEventListener('click', function () {
 });
 
 // If history exists, show it
-// displayHistory();
+displayHistory();
 
 // Show typing time spent
 setInterval(() => {
