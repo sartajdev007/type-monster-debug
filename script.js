@@ -106,17 +106,17 @@ const start = () => {
   if (count) {
     const startCountdown = setInterval(() => {
       countdownOverlay.innerHTML = `<h1>${count}</h1>`;
-      count--;
       // finished timer
       if (count === 0) {
-        // -------------- START TYPING -----------------
-        document.addEventListener("keydown", typeController);
         countdownOverlay.style.display = "none";
+        // -------------- START TYPING -----------------
         display.classList.remove("inactive");
+        document.addEventListener("keydown", typeController);
 
         clearInterval(startCountdown);
         startTime = new Date().getTime();
       };
+      count--;
     }, 1000);
   }
 };
@@ -127,7 +127,7 @@ startBtn.addEventListener('click', function () {
 });
 
 // If history exists, show it
-displayHistory();
+// displayHistory();
 
 // Show typing time spent
 setInterval(() => {
@@ -135,3 +135,4 @@ setInterval(() => {
   const timeSpent = parseInt((currentTime - startTime) / 1000);
   document.getElementById("show-time").innerHTML = `${startTime ? timeSpent : 0} seconds`;
 }, 1000);
+
